@@ -34,55 +34,18 @@
                 <h6>Populer Post</h6>
             </div>
             <!-- Single Popular Post -->
+            @foreach($popularPosts as $post)
             <div class="single-populer-post d-flex">
-                <img src="{{ asset('assets/img/sidebar-img/1.jpg') }}" alt="">
+                <img src="{{ 'storage/' . $post->preview_image }}" alt="">
                 <div class="post-content">
                     <a href="#">
-                        <h6>Top Wineries To Visit In England</h6>
+                        <h6>{{ $post->title }}</h6>
                     </a>
-                    <p>Tuesday, October 3, 2017</p>
+                    <p>{{ $post->created_at }}</p>
                 </div>
             </div>
+            @endforeach
             <!-- Single Popular Post -->
-            <div class="single-populer-post d-flex">
-                <img src="{{ asset('assets/img/sidebar-img/2.jpg') }}" alt="">
-                <div class="post-content">
-                    <a href="#">
-                        <h6>The 8 Best Gastro Pubs In Bath</h6>
-                    </a>
-                    <p>Tuesday, October 3, 2017</p>
-                </div>
-            </div>
-            <!-- Single Popular Post -->
-            <div class="single-populer-post d-flex">
-                <img src="{{ asset('assets/img/sidebar-img/3.jpg') }}" alt="">
-                <div class="post-content">
-                    <a href="#">
-                        <h6>Zermatt Unplugged the best festival</h6>
-                    </a>
-                    <p>Tuesday, October 3, 2017</p>
-                </div>
-            </div>
-            <!-- Single Popular Post -->
-            <div class="single-populer-post d-flex">
-                <img src="{{ asset('assets/img/sidebar-img/4.jpg') }}" alt="">
-                <div class="post-content">
-                    <a href="#">
-                        <h6>Harrogate's Top 10 Independent Eats</h6>
-                    </a>
-                    <p>Tuesday, October 3, 2017</p>
-                </div>
-            </div>
-            <!-- Single Popular Post -->
-            <div class="single-populer-post d-flex">
-                <img src="{{ asset('assets/img/sidebar-img/5.jpg') }}" alt="">
-                <div class="post-content">
-                    <a href="#">
-                        <h6>Eating Out On A Budget In Oxford</h6>
-                    </a>
-                    <p>Tuesday, October 3, 2017</p>
-                </div>
-            </div>
         </div>
 
         <!-- Single Widget Area -->

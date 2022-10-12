@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Main;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 
@@ -9,9 +10,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        $posts = Post::paginate(6);
-        $popularPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);
-        return view('main.index', compact('categories', 'posts', 'popularPosts'));
+        return redirect()->route('post.index');
     }
 }

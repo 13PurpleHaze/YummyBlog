@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers\Post;
 
+use App\Http\Requests\Post\Comment\StoreRequest;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Carbon\Carbon;
 
-class PostController
+class CommentController
 {
-    public function index()
+    public function store(Post $post, StoreRequest $request)
     {
-        $categories = Category::all();
-        $posts = Post::paginate(6);
-        $popularPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);
-        return view('post.index', compact('categories', 'posts', 'popularPosts'));
-    }
-
-    public function show(Post $post)
-    {
-        $popularPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);
-        $relatedPosts = Post::where('category_id', $post->category_id)
-            ->where('id', '!=', $post->id)
-            ->limit(6)
-            ->get();
-        return view('post.show', compact('post', 'popularPosts', 'relatedPosts'));
+        $data = $request->validated();
+        $data['user_id'] = auth()->user()->id;
+        $data['post_id'] = $post->id;
+        Comment::create($data);
+        return redirect()->route('post.show', $post);
     }
 }

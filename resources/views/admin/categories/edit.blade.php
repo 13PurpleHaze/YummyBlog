@@ -24,7 +24,7 @@
             <div class="card-header">
                 <h4>Edit</h4>
             </div>
-            <form action="{{ route('admin.category.update', $category->id) }}" method="post">
+            <form action="{{ route('admin.category.update', $category->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 <div class="card-body">
@@ -33,6 +33,21 @@
                         <input type="text" name="title" class="form-control" value="{{ $category->title }}">
                     </div>
                     @error('title')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <div class="form-group w-50">
+                        <label for="exampleInputFile">Add image</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="picture">
+                                <label class="custom-file-label">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                        </div>
+                    </div>
+                    @error('picture')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
