@@ -13,7 +13,6 @@
                                 <a href="{{ route('category.post.index', $category) }}">
                                     <h5>{{ $category->title }}</h5>
                                 </a>
-                                </form>
                             </div>
                         </div>
                     </div>
