@@ -1,17 +1,16 @@
-@extends('admin.layouts.main')
+@extends('personal.layouts.main')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">User #{{ $user->id }}</h1>
+                    <h1 class="m-0">Edit profile</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.main.index') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">Users</a></li>
-                        <li class="breadcrumb-item active">User #{{ $user->id }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('personal.main.index') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -24,7 +23,7 @@
             <div class="card-header">
                 <h4>Fill in the required fields</h4>
             </div>
-            <form action="{{ route('admin.user.update', $user) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('personal.user.update', $user) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="card-body">
@@ -45,19 +44,8 @@
                     <div class="form-group">
                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                     </div>
-                    <div class="form-group w-25">
-                        <label>Role</label>
-                        <select class="custom-select" name="role">
-                            @foreach($roles as $key => $value)
-                                <option value="{{ $key }}" {{ ($key == $user->role) ? 'selected' : '' }}>{{ $value }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @error('role')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
                     <div class="form-group">
-                        <label for="exampleInputFile">Photo</label>
+                        <label for="exampleInputFile">Your photo</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="photo">
@@ -68,6 +56,12 @@
                     @error('photo')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
+                    <div class="form-group">
+                        <input type="hidden" name="user_id" value="{{ $user->id }}">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="role" value="{{ $user->role }}">
+                    </div>
                 </div>
                 <div class="card-footer">
                     <div class="form-group">

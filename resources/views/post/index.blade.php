@@ -94,50 +94,59 @@
                 <div class="col-12 col-lg-8">
                     <div class="row">
 
-                        <!-- Single Post -->
+                        <!-- Most Popular Post -->
                         <div class="col-12">
                             <div class="single-post wow fadeInUp" data-wow-delay=".2s">
                                 <!-- Post Thumb -->
                                 <div class="post-thumb">
-                                    <img src="{{ asset('assets/img/blog-img/1.jpg') }}" alt="">
+                                    <img src="{{ asset('storage/' . $mostPopularPost->preview_image) }}" alt="">
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">
                                     <div class="post-meta d-flex">
                                         <div class="post-author-date-area d-flex">
-                                            <!-- Post Author -->
-                                            <div class="post-author">
-                                                <a href="#">By Marian</a>
-                                            </div>
                                             <!-- Post Date -->
                                             <div class="post-date">
-                                                <a href="#">May 19, 2017</a>
+                                                <a href="#">{{ $mostPopularPost->dateAsCarbon->format('F d, Y') }}</a>
                                             </div>
                                         </div>
                                         <!-- Post Comment & Share Area -->
                                         <div class="post-comment-share-area d-flex">
                                             <!-- Post Favourite -->
                                             <div class="post-favourite">
-                                                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i> 10</a>
+                                                @auth()
+                                                    <form action="{{ route('post.like.store', $mostPopularPost) }}"
+                                                          method="post">
+                                                        @csrf
+                                                        <button type="submit" class="border-0 bg-transparent"
+                                                                style="cursor: pointer; font-size: 14px">
+                                                            @if(auth()->user()->posts->contains($mostPopularPost->id))
+                                                                <i class="fa fa-solid fa-heart"></i>
+                                                            @else
+                                                                <i class="fa fa-heart-o"></i>
+                                                            @endif
+                                                            {{ $mostPopularPost->likedUsers->count() }}</button>
+                                                    </form>
+                                                @endauth
+                                                @guest()
+                                                    <a href="#" class="pe-none">
+                                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                                        {{ $mostPopularPost->likedUsers->count() }}
+                                                    </a>
+                                                @endguest
                                             </div>
                                             <!-- Post Comments -->
-                                            <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
-                                            </div>
-                                            <!-- Post Share -->
-                                            <div class="post-share">
-                                                <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                                            <div class="post-comments pl-2">
+                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> {{ $mostPopularPost->comments->count() }}</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#">
-                                        <h2 class="post-headline">Boil The Kettle And Make A Cup Of Tea Folks, This Is
-                                            Going To Be A Big One!</h2>
+                                    <a href="{{ route('post.show', $mostPopularPost) }}">
+                                        <h2 class="post-headline">{{ $mostPopularPost->title }}</h2>
                                     </a>
-                                    <p>Tiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                        commodoconsequat.</p>
-                                    <a href="#" class="read-more">Continue Reading..</a>
+                                    <p>{!! substr($mostPopularPost->content, 0, 40) !!}</p>
+                                    <a href="{{ route('post.show', $mostPopularPost) }}" class="read-more">Continue
+                                        Reading..</a>
                                 </div>
                             </div>
                         </div>

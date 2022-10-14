@@ -262,7 +262,7 @@
                                             <div class="comment-wrapper d-flex">
                                                 <!-- Comment Meta -->
                                                 <div class="comment-author">
-                                                    <img src="{{ asset('img/blog-img/17.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="">
                                                 </div>
                                                 <!-- Comment Content -->
                                                 <div class="comment-content">

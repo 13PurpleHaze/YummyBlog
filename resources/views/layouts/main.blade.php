@@ -46,21 +46,20 @@
                 <div class="signup-search-area d-flex align-items-center justify-content-end">
                     <div class="login_register_area d-flex">
                         @guest()
-                        <div class="login">
-                            <a href="{{ route('login') }}">Sing in</a>
-                        </div>
-                        <div class="register">
-                            <a href="{{ route('register') }}">Sing up</a>
-                        </div>
+                            <div class="login">
+                                <a href="{{ route('login') }}">Sing in</a>
+                            </div>
+                            <div class="register">
+                                <a href="{{ route('register') }}">Sing up</a>
+                            </div>
                         @endguest
                     </div>
                     @auth()
-                    <div class="d-flex">
-                        <div>
-                            <img src="" alt="">
-                            <a href="{{ route('personal.main.index') }}">User name</a>
+                        <div class="d-flex justify-content-end align-items-center h-100 p-1" style="width: 40px">
+                            <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : ''}}"
+                                 alt="" class="img-fluid h-100" style="border-radius: 50%">
+                            <a href="{{ route('personal.main.index') }}" class="ml-2">{{ auth()->user()->name }}</a>
                         </div>
-                    </div>
                     @endauth
                 </div>
             </div>

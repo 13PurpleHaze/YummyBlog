@@ -10,13 +10,10 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
-            </div>
+        <div class="d-flex justify-content-start align-items-center mt-3 mb-3 pl-2" style="height: 50px">
+            <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : ''}}"
+                 alt="" class="h-100" style="border-radius: 50%; width: 50px">
+            <a href="{{ route('admin.user.edit', auth()->user()) }}" class="ml-2">{{ auth()->user()->name }}</a>
         </div>
 
         <!-- Sidebar Menu -->

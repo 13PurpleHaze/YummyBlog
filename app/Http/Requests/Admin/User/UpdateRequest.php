@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'email' => 'required|email|unique:users,email,' . $this->user_id,
             'user_id' => 'required|exists:users,id',
             'role' => 'required',
+            'photo' => 'nullable|file',
         ];
     }
 }

@@ -10,15 +10,20 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+        {{--<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image h-100">
+                <img src="{{ isset(auth()->user()->photo) ? asset('storage/' . auth()->user()->photo) : asset('storage/images/none.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <a href="{{ route('personal.user.edit') }}" class="d-block">{{ auth()->user()->name }}</a>
             </div>
-        </div>
+        </div>--}}
 
+        <div class="d-flex justify-content-start align-items-center mt-3 mb-3 pl-2" style="height: 50px">
+            <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : ''}}"
+                 alt="" class="h-100" style="border-radius: 50%; width: 50px">
+            <a href="{{ route('personal.user.edit') }}" class="ml-2">{{ auth()->user()->name }}</a>
+        </div>
         {{--<!-- SidebarSearch Form -->
         <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">

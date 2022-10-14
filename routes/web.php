@@ -21,7 +21,9 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->name('main.index');
+Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->name('main.index');/*
+Route::get('/', [\App\Http\Controllers\Main\AboutController::class, 'index'])->name('about.index');
+Route::get('/', [\App\Http\Controllers\Main\Contactontroller::class, 'index'])->name('contact.index');*/
 Route::group(['prefix' => 'posts'], function() {
     Route::get('/', [\App\Http\Controllers\Post\PostController::class, 'index'])->name('post.index');
     Route::get('/{post}', [\App\Http\Controllers\Post\PostController::class, 'show'])->name('post.show');
@@ -79,6 +81,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::get('/users/edit/{user}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
     Route::patch('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
     Route::delete('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
+
+    Route::get('/edit/{user}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
+    Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
 });
 
 Route::group(['prefix' => 'personal', 'namespace' => 'Personal', 'middleware' => ['auth', 'verified']], function() {
@@ -89,4 +94,7 @@ Route::group(['prefix' => 'personal', 'namespace' => 'Personal', 'middleware' =>
     Route::get('/comments/edit/{comment}', [App\Http\Controllers\Personal\CommentController::class, 'edit'])->name('personal.comment.edit');
     Route::patch('/comments/{comment}', [App\Http\Controllers\Personal\CommentController::class, 'update'])->name('personal.comment.update');
     Route::delete('/comments/{comment}', [App\Http\Controllers\Personal\CommentController::class, 'destroy'])->name('personal.comment.destroy');
+
+    Route::get('/edit', [\App\Http\Controllers\Personal\UserController::class, 'edit'])->name('personal.user.edit');
+    Route::patch('/{user}', [\App\Http\Controllers\Personal\UserController::class, 'update'])->name('personal.user.update');
 });

@@ -24,7 +24,7 @@
             <div class="card-header">
                 <h4>Fill in the required fields</h4>
             </div>
-            <form action="{{ route('admin.user.store') }}" method="post">
+            <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -50,6 +50,18 @@
                         </select>
                     </div>
                     @error('role')
+                    <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <div class="form-group">
+                        <label for="exampleInputFile">Photo</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="photo">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    @error('photo')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>

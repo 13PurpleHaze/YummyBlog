@@ -13,7 +13,9 @@ class PostController
         $categories = Category::all();
         $posts = Post::paginate(6);
         $popularPosts = Post::withCount('likedUsers')->orderBy('liked_users_count', 'DESC')->get()->take(4);
-        return view('post.index', compact('categories', 'posts', 'popularPosts'));
+        $mostPopularPost = $popularPosts[0];
+        //dd($mostPopularPost);
+        return view('post.index', compact('categories', 'posts', 'popularPosts', 'mostPopularPost'));
     }
 
     public function show(Post $post)
