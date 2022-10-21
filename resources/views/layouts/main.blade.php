@@ -6,7 +6,6 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
     <title>Yummy Blog - Food Blog Template</title>
@@ -28,14 +27,6 @@
     <div class="yummy-load"></div>
 </div>
 
-<!-- Background Pattern Swither -->
-<div id="pattern-switcher">
-    Bg Pattern
-</div>
-<div id="patter-close">
-    <i class="fa fa-times" aria-hidden="true"></i>
-</div>
-
 <!-- ****** Top Header Area Start ****** -->
 <div class="top_header_area">
     <div class="container">
@@ -43,36 +34,31 @@
             <div class="col-5 col-sm-6">
                 <!--  Top Social bar start -->
                 <div class="top_social_bar">
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    @foreach($socials as $social)
+                        <a href="{{$social->link}}"><i class="fa fa-{{$social->title}}" aria-hidden="true"></i></a>
+                    @endforeach
                 </div>
             </div>
             <!--  Login Register Area -->
             <div class="col-7 col-sm-6">
                 <div class="signup-search-area d-flex align-items-center justify-content-end">
                     <div class="login_register_area d-flex">
-                        <div class="login">
-                            <a href="register.html">Sing in</a>
+                        @guest()
+                            <div class="login">
+                                <a href="{{ route('login') }}">Sing in</a>
+                            </div>
+                            <div class="register">
+                                <a href="{{ route('register') }}">Sing up</a>
+                            </div>
+                        @endguest
+                    </div>
+                    @auth()
+                        <div class="d-flex justify-content-end align-items-center h-100 p-1" style="width: 40px">
+                            <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : ''}}"
+                                 alt="" class="img-fluid h-100" style="border-radius: 50%">
+                            <a href="{{ route('personal.main.index') }}" class="ml-2">{{ auth()->user()->name }}</a>
                         </div>
-                        <div class="register">
-                            <a href="register.html">Sing up</a>
-                        </div>
-                    </div>
-                    <!-- Search Button Area -->
-                    <div class="search_button">
-                        <a class="searchBtn" href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                    </div>
-                    <!-- Search Form -->
-                    <div class="search-hidden-form">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search-anything" placeholder="Search Anything...">
-                            <input type="submit" value="" class="d-none">
-                            <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
-                        </form>
-                    </div>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -87,7 +73,7 @@
             <!-- Logo Area Start -->
             <div class="col-12">
                 <div class="logo_area text-center">
-                    <a href="index.html" class="yummy-logo">Yummy Blog</a>
+                    <a href="{{ route('main.index') }}" class="yummy-logo">Yummy Blog</a>
                 </div>
             </div>
         </div>
@@ -103,33 +89,13 @@
                     <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                         <ul class="navbar-nav" id="yummy-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                    <a class="dropdown-item" href="index.html">Home</a>
-                                    <a class="dropdown-item" href="archive.html">Archive</a>
-                                    <a class="dropdown-item" href="single.html">Single Blog</a>
-                                    <a class="dropdown-item" href="static.html">Static Page</a>
-                                    <a class="dropdown-item" href="contact.html">Contact</a>
-                                </div>
+                                <a class="nav-link" href="{{ route('main.index') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Features</a>
+                                <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Categories</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="archive.html">Archive</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="{{ route('tag.index') }}">Tags</a>
                             </li>
                         </ul>
                     </div>
@@ -142,7 +108,7 @@
 @yield('content');
 
 <!-- ****** Instagram Area Start ****** -->
-<div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
+{{--<div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
 
     <!-- Instagram Item -->
     <div class="instagram_gallery_item">
@@ -160,201 +126,11 @@
         </div>
     </div>
 
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/2.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/3.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/4.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/5.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/6.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/1.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Instagram Item -->
-    <div class="instagram_gallery_item">
-        <!-- Instagram Thumb -->
-        <img src="{{ asset('assets/img/instagram-img/2.jpg') }}" alt="">
-        <!-- Hover -->
-        <div class="hover_overlay">
-            <div class="yummy-table">
-                <div class="yummy-table-cell">
-                    <div class="follow-me text-center">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+</div>--}}
 <!-- ****** Our Creative Portfolio Area End ****** -->
-
-<!-- ****** Footer Social Icon Area Start ****** -->
-<div class="social_icon_area clearfix">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="footer-social-area d-flex">
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i><span>facebook</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Twitter</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i><span>GOOGLE+</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i><span>linkedin</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-vimeo" aria-hidden="true"></i><span>VIMEO</span></a>
-                    </div>
-                    <div class="single-icon">
-                        <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i><span>YOUTUBE</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ****** Footer Social Icon Area End ****** -->
 
 <!-- ****** Footer Menu Area Start ****** -->
 <footer class="footer_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="footer-content">
-                    <!-- Logo Area Start -->
-                    <div class="footer-logo-area text-center">
-                        <a href="index.html" class="yummy-logo">Yummy Blog</a>
-                    </div>
-                    <!-- Menu Area Start -->
-                    <nav class="navbar navbar-expand-lg">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#yummyfood-footer-nav" aria-controls="yummyfood-footer-nav"
-                                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"
-                                                                                        aria-hidden="true"></i> Menu
-                        </button>
-                        <!-- Menu Area Start -->
-                        <div class="collapse navbar-collapse justify-content-center" id="yummyfood-footer-nav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Categories</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Archive</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <div class="row">
             <div class="col-12">
