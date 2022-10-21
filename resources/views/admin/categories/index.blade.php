@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-footer clearfix">
                     <a href="{{ route('admin.category.create') }}" class="btn btn-dark d-inline-block float-left">Create new</a>
-                    {{ $categories->links() }}
+                    <div class="float-right">{{ $categories->links() }}</div>
                 </div>
             </div>
         </div>

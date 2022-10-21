@@ -37,12 +37,36 @@
                             <td>Title</td>
                             <td>{{ $post->title }}</td>
                         </tr>
+                        <tr>
+                            <td>Content</td>
+                            <td>{!! $post->content !!}</td>
+                        </tr>
+                        <tr>
+                            <td>Preview image</td>
+                            <td><img src="{{ asset('storage/' . $post->preview_image) }}" alt="" class="w-25"></td>
+                        </tr>
+                        <tr>
+                            <td>Main image</td>
+                            <td><img src="{{ asset('storage/' . $post->main_image) }}" alt="" class="w-25"></td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{ $post->category->title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tags</td>
+                            <td>
+                                @foreach($post->tags as $tag)
+                                    {{ $tag->title }}
+                                @endforeach
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('admin.tag.edit', $post) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('admin.tag.destroy', $post) }}" method="post" class="d-inline-block">
+                    <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary">Edit</a>
+                    <form action="{{ route('admin.post.destroy', $post) }}" method="post" class="d-inline-block">
                         @csrf
                         @method('delete')
                         <button type="submit" class="btn btn-danger">Delete</button>

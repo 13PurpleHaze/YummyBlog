@@ -55,7 +55,7 @@
                 </div>
                 <div class="card-footer clearfix">
                     <a href="{{ route('admin.tag.create') }}" class="btn btn-dark d-inline-block float-left">Create new</a>
-                    {{ $tags->links() }}
+                    <div class="float-right">{{ $tags->links() }} </div>
                 </div>
             </div>
         </div>

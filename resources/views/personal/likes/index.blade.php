@@ -54,6 +54,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer">
+                    {{ $posts->links() }}
+                </div>
             </div>
     </section>
 @endsection
