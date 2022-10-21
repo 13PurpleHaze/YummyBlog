@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ route('admin.user.create') }}" class="btn btn-dark d-inline-block float-left">Create new</a>
-                    {{ $users->links() }}
+                    <div class="float-right">{{ $users->links() }}</div>
                 </div>
             </div>
         </div>

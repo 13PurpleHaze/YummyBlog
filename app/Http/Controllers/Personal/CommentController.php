@@ -12,7 +12,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = auth()->user()->comments;
+        $comments = auth()->user()->comments()->paginate(10);
         return view('personal.comments.index', compact('comments'));
     }
 

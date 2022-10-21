@@ -57,8 +57,8 @@
                 </div>
                 <div class="card-footer clearfix">
                     <a href="{{ route('admin.post.create') }}" class="btn btn-dark float-left d-inline-block">Create new</a>
-                    {{ $posts->links() }}
-            </div>
+                    <div class="float-right">{{ $posts->links() }}</div>
+                </div>
         </div>
     </section>
 @endsection

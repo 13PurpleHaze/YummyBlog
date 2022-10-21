@@ -10,7 +10,7 @@ class LikeController extends Controller
 {
     public function index()
     {
-        $posts = auth()->user()->posts;
+        $posts = auth()->user()->posts()->paginate(10);
         return view('personal.likes.index', compact('posts'));
     }
 

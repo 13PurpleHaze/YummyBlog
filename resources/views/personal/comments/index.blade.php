@@ -52,6 +52,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-footer">
+                    {{ $comments->links() }}
+                </div>
             </div>
     </section>
 @endsection
