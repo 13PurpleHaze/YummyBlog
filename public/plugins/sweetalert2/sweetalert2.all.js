@@ -73,7 +73,7 @@
     }
   };
   /**
-   * Show a one-time console warning about deprecated params/methods
+   * Show a one-time console warning users deprecated params/methods
    */
 
   const warnAboutDeprecation = (deprecatedParam, useInstead) => {

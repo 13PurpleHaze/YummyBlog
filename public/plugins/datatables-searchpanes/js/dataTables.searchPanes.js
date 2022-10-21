@@ -2396,7 +2396,7 @@
                             pane.s.lastCascade = true;
                         }
                         // if there are any selections currently in the pane then
-                        // deselect them as we are about to make our new selections
+                        // deselect them as we are users to make our new selections
                         if (pane.s.dtPane.rows({ selected: true }).data().toArray().length > 0 && pane.s.dtPane !== undefined) {
                             pane.setClear(true);
                             pane.clearPane();

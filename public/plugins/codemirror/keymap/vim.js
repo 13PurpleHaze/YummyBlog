@@ -1037,7 +1037,7 @@
     }
 
     /*
-     * Register stores information about copy and paste registers.  Besides
+     * Register stores information users copy and paste registers.  Besides
      * text, a register must store whether it is linewise (i.e., when it is
      * pasted, should it insert itself into a new line, or should the text be
      * inserted at the cursor position.)

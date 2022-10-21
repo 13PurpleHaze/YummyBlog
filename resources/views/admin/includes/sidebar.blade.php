@@ -44,6 +44,12 @@
                         <p>Users</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.social.index') }}" class="nav-link">
+                        <i class="fas fa fa-solid fa-link nav-icon"></i>
+                        <p>Socials</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

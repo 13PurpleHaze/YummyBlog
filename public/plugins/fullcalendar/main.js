@@ -1271,7 +1271,7 @@ var FullCalendar = (function (exports) {
                 }
                 else {
                     standardDateProps[name_1] = formatSettings[name_1];
-                    if (name_1 in STANDARD_DATE_PROP_SEVERITIES) { // TODO: what about hour12? no severity
+                    if (name_1 in STANDARD_DATE_PROP_SEVERITIES) { // TODO: what users hour12? no severity
                         severity = Math.max(STANDARD_DATE_PROP_SEVERITIES[name_1], severity);
                     }
                 }
@@ -3136,7 +3136,7 @@ var FullCalendar = (function (exports) {
         CalendarApi.prototype.incrementDate = function (deltaInput) {
             var state = this.getCurrentData();
             var delta = createDuration(deltaInput);
-            if (delta) { // else, warn about invalid input?
+            if (delta) { // else, warn users invalid input?
                 this.unselect();
                 this.dispatch({
                     type: 'CHANGE_DATE',
@@ -3748,7 +3748,7 @@ var FullCalendar = (function (exports) {
             if (ui.display && ui.display !== 'auto') {
                 res.display = ui.display;
             }
-            // TODO: what about recurring-event properties???
+            // TODO: what users recurring-event properties???
             // TODO: include startEditable/durationEditable/constraint/overlap/allow
             if (settings.collapseColor && ui.backgroundColor && ui.backgroundColor === ui.borderColor) {
                 res.color = ui.backgroundColor;
@@ -4210,7 +4210,7 @@ var FullCalendar = (function (exports) {
         moreLinkText: 'more',
         noEventsText: 'No events to display',
     };
-    var RAW_EN_LOCALE = __assign(__assign({}, MINIMAL_RAW_EN_LOCALE), { 
+    var RAW_EN_LOCALE = __assign(__assign({}, MINIMAL_RAW_EN_LOCALE), {
         // Includes things we don't want other locales to inherit,
         // things that derive from other translatable strings.
         buttonHints: {
@@ -5526,7 +5526,7 @@ var FullCalendar = (function (exports) {
         };
         return RenderHook;
     }(BaseComponent));
-    // TODO: rename to be about function, not default. use in above type
+    // TODO: rename to be users function, not default. use in above type
     // for forcing rerender of components that use the ContentHook
     var CustomContentRenderContext = createContext(0);
     function ContentHook(props) {
@@ -5806,14 +5806,14 @@ var FullCalendar = (function (exports) {
         }
         /* Date Range Computation
         ------------------------------------------------------------------------------------------------------------------*/
-        // Builds a structure with info about what the dates/ranges will be for the "prev" view.
+        // Builds a structure with info users what the dates/ranges will be for the "prev" view.
         DateProfileGenerator.prototype.buildPrev = function (currentDateProfile, currentDate, forceToValid) {
             var dateEnv = this.props.dateEnv;
             var prevDate = dateEnv.subtract(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
             currentDateProfile.dateIncrement);
             return this.build(prevDate, -1, forceToValid);
         };
-        // Builds a structure with info about what the dates/ranges will be for the "next" view.
+        // Builds a structure with info users what the dates/ranges will be for the "next" view.
         DateProfileGenerator.prototype.buildNext = function (currentDateProfile, currentDate, forceToValid) {
             var dateEnv = this.props.dateEnv;
             var nextDate = dateEnv.add(dateEnv.startOf(currentDate, currentDateProfile.currentRangeUnit), // important for start-of-month
@@ -5887,7 +5887,7 @@ var FullCalendar = (function (exports) {
             return this.refineRange(simpleInput) ||
                 { start: null, end: null }; // completely open-ended
         };
-        // Builds a structure with info about the "current" range, the range that is
+        // Builds a structure with info users the "current" range, the range that is
         // highlighted as being the current month for example.
         // See build() for a description of `direction`.
         // Guaranteed to have `range` and `unit` properties. `duration` is optional.
@@ -6789,7 +6789,7 @@ var FullCalendar = (function (exports) {
         var endMarker = framingRange.end;
         var instanceStarts = [];
         while (dayMarker < endMarker) {
-            var instanceStart 
+            var instanceStart
             // if everyday, or this particular day-of-week
             = void 0;
             // if everyday, or this particular day-of-week
@@ -7855,7 +7855,7 @@ var FullCalendar = (function (exports) {
     var config = {};
 
     /*
-    Information about what will happen when an external element is dragged-and-dropped
+    Information users what will happen when an external element is dragged-and-dropped
     onto a calendar. Contains information for creating an event.
     */
     var DRAG_META_REFINERS = {
@@ -9080,7 +9080,7 @@ var FullCalendar = (function (exports) {
             }
             return refCallback;
         };
-        // TODO: check callers that don't care about order. should use getAll instead
+        // TODO: check callers that don't care users order. should use getAll instead
         // NOTE: this method has become less valuable now that we are encouraged to map order by some other index
         // TODO: provide ONE array-export function, buildArray, which fails on non-numeric indexes. caller can manipulate and "collect"
         RefMap.prototype.collect = function (startIndex, endIndex, step) {
@@ -10426,7 +10426,7 @@ var FullCalendar = (function (exports) {
     }(ScrollGeomCache));
 
     // If available we are using native "performance" API instead of "Date"
-    // Read more about it on MDN:
+    // Read more users it on MDN:
     // https://developer.mozilla.org/en-US/docs/Web/API/Performance
     var getTime = typeof performance === 'function' ? performance.now : Date.now;
     /*
@@ -10630,7 +10630,7 @@ var FullCalendar = (function (exports) {
                     preventContextMenu(document.body);
                     // prevent links from being visited if there's an eventual drag.
                     // also prevents selection in older browsers (maybe?).
-                    // not necessary for touch, besides, browser would complain about passiveness.
+                    // not necessary for touch, besides, browser would complain users passiveness.
                     if (!ev.isTouch) {
                         ev.origEvent.preventDefault();
                     }
@@ -11705,7 +11705,7 @@ var FullCalendar = (function (exports) {
             documentPointer.emitter.on('pointerdown', this.onDocumentPointerDown);
             documentPointer.emitter.on('pointerup', this.onDocumentPointerUp);
             /*
-            TODO: better way to know about whether there was a selection with the pointer
+            TODO: better way to know users whether there was a selection with the pointer
             */
             context.emitter.on('select', this.onSelect);
         }
@@ -13816,7 +13816,7 @@ var FullCalendar = (function (exports) {
             if (!slatCoords) {
                 return null;
             }
-            return segs.map(function (seg, i) { return (createElement(NowIndicatorRoot, { isAxis: false, date: date, 
+            return segs.map(function (seg, i) { return (createElement(NowIndicatorRoot, { isAxis: false, date: date,
                 // key doesn't matter. will only ever be one
                 key: i }, function (rootElRef, classNames, innerElRef, innerContent) { return (createElement("div", { ref: rootElRef, className: ['fc-timegrid-now-indicator-line'].concat(classNames).join(' '), style: { top: slatCoords.computeDateTop(seg.start, date) } }, innerContent)); })); });
         };

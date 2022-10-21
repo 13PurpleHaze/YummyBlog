@@ -141,7 +141,7 @@
                             <!-- Tags Area -->
                             <div class="tags-area">
                                 @foreach($post->tags as $tag)
-                                    <a href="#">{{ $tag->title }}</a>
+                                    <a href="{{ route('tag.post.index', $tag) }}">{{ $tag->title }}</a>
                                 @endforeach
                             </div>
 
@@ -173,87 +173,13 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/16.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- Single Related Post-->
-                                    <div class="single-post">
-                                        <!-- Post Thumb -->
-                                        <div class="post-thumb">
-                                            <img src="img/blog-img/5.jpg" alt="">
-                                        </div>
-                                        <!-- Post Content -->
-                                        <div class="post-content">
-                                            <div class="post-meta d-flex">
-                                                <div class="post-author-date-area d-flex">
-                                                    <!-- Post Author -->
-                                                    <div class="post-author">
-                                                        <a href="#">By Marian</a>
-                                                    </div>
-                                                    <!-- Post Date -->
-                                                    <div class="post-date">
-                                                        <a href="#">May 19, 2017</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="#">
-                                                <h6>The Top Breakfast And Brunch Spots In Hove</h6>
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
                             <!-- Comment Area Start -->
+                            @if($post->comments->count() > 0)
                             <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">2 Comments</h4>
+                                <h4 class="mb-30">{{ $post->comments->count() > 1 ? $post->comments->count() . ' commments' : $post->comments->count() . ' comment' }}</h4>
 
                                 <ol>
                                     @foreach($post->comments as $comment)
@@ -262,7 +188,7 @@
                                             <div class="comment-wrapper d-flex">
                                                 <!-- Comment Meta -->
                                                 <div class="comment-author">
-                                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="">
+                                                    <img src="{{ isset($comment->user->photo) ? asset('storage/' . $comment->user->photo) : asset('storage/images/none.png') }}" alt="">
                                                 </div>
                                                 <!-- Comment Content -->
                                                 <div class="comment-content">
@@ -294,6 +220,7 @@
                                     @endforeach
                                 </ol>
                             </div>
+                            @endif
                             @auth()
                                 <!-- Leave A Comment -->
                                 <div class="leave-comment-area section_padding_50 clearfix">

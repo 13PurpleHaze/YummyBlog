@@ -21,9 +21,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->name('main.index');/*
-Route::get('/', [\App\Http\Controllers\Main\AboutController::class, 'index'])->name('about.index');
-Route::get('/', [\App\Http\Controllers\Main\Contactontroller::class, 'index'])->name('contact.index');*/
+Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->name('main.index');
 Route::group(['prefix' => 'posts'], function() {
     Route::get('/', [\App\Http\Controllers\Post\PostController::class, 'index'])->name('post.index');
     Route::get('/{post}', [\App\Http\Controllers\Post\PostController::class, 'show'])->name('post.show');
@@ -81,6 +79,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::get('/users/edit/{user}', [App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
     Route::patch('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
     Route::delete('/users/{user}', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
+
+    Route::get('/socials', [App\Http\Controllers\Admin\SocialController::class, 'index'])->name('admin.social.index');
+    Route::get('/socials/create', [App\Http\Controllers\Admin\SocialController::class, 'create'])->name('admin.social.create');
+    Route::post('/socials', [App\Http\Controllers\Admin\SocialController::class, 'store'])->name('admin.social.store');
+    Route::get('/socials/{social}', [App\Http\Controllers\Admin\SocialController::class, 'show'])->name('admin.social.show');
+    Route::get('/socials/edit/{social}', [App\Http\Controllers\Admin\SocialController::class, 'edit'])->name('admin.social.edit');
+    Route::patch('/socials/{social}', [App\Http\Controllers\Admin\SocialController::class, 'update'])->name('admin.social.update');
+    Route::delete('/socials/{social}', [App\Http\Controllers\Admin\SocialController::class, 'destroy'])->name('admin.social.destroy');
 
     Route::get('/edit/{user}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.user.edit');
     Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');

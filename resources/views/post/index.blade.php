@@ -1,92 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-    <!-- ****** Welcome Post Area Start ****** -->
-    <section class="welcome-post-sliders owl-carousel mb-4">
-
-        <!-- Single Slide -->
-        <div class="welcome-single-slide">
-            <!-- Post Thumb -->
-            <img src="{{ asset('assets/img/bg-img/slide-1.jpg') }}" alt="">
-            <!-- Overlay Text -->
-            <div class="project_title">
-                <div class="post-date-commnents d-flex">
-                    <a href="#">May 19, 2017</a>
-                    <a href="#">5 Comment</a>
-                </div>
-                <a href="#">
-                    <h5>“I’ve Come and I’m Gone”: A Tribute to Istanbul’s Street</h5>
-                </a>
-            </div>
-        </div>
-
-        <!-- Single Slide -->
-        <div class="welcome-single-slide">
-            <!-- Post Thumb -->
-            <img src="{{ asset('assets/img/bg-img/slide-2.jpg') }}" alt="">
-            <!-- Overlay Text -->
-            <div class="project_title">
-                <div class="post-date-commnents d-flex">
-                    <a href="#">May 19, 2017</a>
-                    <a href="#">5 Comment</a>
-                </div>
-                <a href="#">
-                    <h5>“I’ve Come and I’m Gone”: A Tribute to Istanbul’s Street</h5>
-                </a>
-            </div>
-        </div>
-
-        <!-- Single Slide -->
-        <div class="welcome-single-slide">
-            <!-- Post Thumb -->
-            <img src="{{ asset('assets/img/bg-img/slide-3.jpg') }}" alt="">
-            <!-- Overlay Text -->
-            <div class="project_title">
-                <div class="post-date-commnents d-flex">
-                    <a href="#">May 19, 2017</a>
-                    <a href="#">5 Comment</a>
-                </div>
-                <a href="#">
-                    <h5>“I’ve Come and I’m Gone”: A Tribute to Istanbul’s Street</h5>
-                </a>
-            </div>
-        </div>
-
-        <!-- Single Slide -->
-        <div class="welcome-single-slide">
-            <!-- Post Thumb -->
-            <img src="{{ asset('assets/img/bg-img/slide-4.jpg') }}" alt="">
-            <!-- Overlay Text -->
-            <div class="project_title">
-                <div class="post-date-commnents d-flex">
-                    <a href="#">May 19, 2017</a>
-                    <a href="#">5 Comment</a>
-                </div>
-                <a href="#">
-                    <h5>“I’ve Come and I’m Gone”: A Tribute to Istanbul’s Street</h5>
-                </a>
-            </div>
-        </div>
-
-        <!-- Single Slide -->
-        <div class="welcome-single-slide">
-            <!-- Post Thumb -->
-            <img src="{{ asset('assets/img/bg-img/slide-4.jpg') }}" alt="">
-            <!-- Overlay Text -->
-            <div class="project_title">
-                <div class="post-date-commnents d-flex">
-                    <a href="#">May 19, 2017</a>
-                    <a href="#">5 Comment</a>
-                </div>
-                <a href="#">
-                    <h5>“I’ve Come and I’m Gone”: A Tribute to Istanbul’s Street</h5>
-                </a>
-            </div>
-        </div>
-
-    </section>
-    <!-- ****** Welcome Area End ****** -->
-
     <!-- ****** Blog Area Start ****** -->
     <section class="blog_area section_padding_0_80">
         <div class="container">
@@ -144,8 +58,7 @@
                                     <a href="{{ route('post.show', $mostPopularPost) }}">
                                         <h2 class="post-headline">{{ $mostPopularPost->title }}</h2>
                                     </a>
-                                    <p>{!! substr($mostPopularPost->content, 0, 40) !!}</p>
-                                    <a href="{{ route('post.show', $mostPopularPost) }}" class="read-more">Continue
+                                    <a href="{{ route('post.show', $mostPopularPost) }}" class="read-more">Start
                                         Reading..</a>
                                 </div>
                             </div>

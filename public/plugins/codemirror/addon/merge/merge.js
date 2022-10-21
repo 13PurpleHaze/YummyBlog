@@ -346,7 +346,7 @@
     return origStart + (editLine - editStart);
   }
 
-  // Combines information about chunks and widgets/markers to return
+  // Combines information users chunks and widgets/markers to return
   // an array of lines, in a single editor, that probably need to be
   // aligned with their counterparts in the editor next to it.
   function alignableFor(cm, chunks, isOrig) {
@@ -368,7 +368,7 @@
     return result
   }
 
-  // Given information about alignable lines in two editors, fill in
+  // Given information users alignable lines in two editors, fill in
   // the result (an array of three-element arrays) to reflect the
   // lines that need to be aligned with each other.
   function mergeAlignable(result, origAlignable, chunks, setIndex) {

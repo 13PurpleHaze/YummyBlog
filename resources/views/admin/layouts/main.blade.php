@@ -48,6 +48,9 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item align-self-center">
+                <a href="{{ route('post.index') }}" class="text-fuchsia"><i class="fa fa-solid fa-backward"></i></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                     <i class="fas fa-expand-arrows-alt"></i>
