@@ -90,8 +90,20 @@
                                             </div>
                                             <!-- Post Comments -->
                                             <div class="post-comments">
-                                                <a href="#" class="pl-2"><i class="fa fa-comment-o"
-                                                                            aria-hidden="true"></i> {{ $post->comments->count() }}
+                                                <a href="#" class="pl-2">
+                                                    @auth()
+                                                        @if(auth()->user()->comments->contains('post_id', $post->id))
+                                                            <i class="fa fas fa-comment" aria-hidden="true"></i>
+                                                            {{ $post->comments->count() }}
+                                                        @else
+                                                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                            {{ $post->comments->count() }}
+                                                        @endif
+                                                    @endauth
+                                                    @guest()
+                                                        <i class="fa fas fa-comment-o" aria-hidden="true"></i>
+                                                        {{ $post->comments->count() }}
+                                                    @endguest
                                                 </a>
                                             </div>
                                             <!-- Post Share -->
@@ -103,37 +115,6 @@
                                     <a href="#">
                                         <h2 class="post-headline">{{ $post->title }}</h2>
                                     </a>
-                                    {{--<p>Tiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea. Liusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, qui s nostrud exercitation ullamLorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-
-                                    <blockquote class="yummy-blockquote mt-30 mb-30">
-                                        <h5 class="mb-30">“Technology is nothing. What's important is that you have a faith in people, that they're basically good and smart, and if you give them tools, they'll do wonderful things with them.”</h5>
-                                        <h6 class="text-muted">Steven Jobs</h6>
-                                    </blockquote>
-
-                                    <h4>You Can Buy For Less Than A College Degree</h4>
-                                    <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
-
-                                    <img class="br-30 mb-30" src="img/blog-img/11.jpg" alt="">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-
-                                    <img class="br-30 mb-30" src="img/blog-img/12.jpg" alt="">
-                                    <p>Liusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, qui s nostrud exercitation ullamLorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-                                    <img class="br-30 mb-30" src="img/blog-img/13.jpg" alt="">
-                                    <h4>You Can Buy For Less Than A College Degree</h4>
-                                    <p>Liusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, qui s nostrud exercitation ullamLorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-
-                                    <ul class="mb-30">
-                                        <li>1/3 cup Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>1/2 cup Veniam, quis nostrud exercitation</li>
-                                        <li>Ut labore et dolore magna</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                        <li>Ut labore et dolore magna</li>
-                                        <li>Lonsectetur adipisicing elit.Lorem ipsum</li>
-                                    </ul>
-
-                                    <img class="br-30 mb-15" src="img/blog-img/14.jpg" alt="">--}}
                                     {!! $post->content !!}
                                 </div>
                             </div>
@@ -145,6 +126,7 @@
                                 @endforeach
                             </div>
 
+                            @if($relatedPosts)
                             <!-- Related Post Area -->
                             <div class="related-post-area section_padding_50">
                                 <h4 class="mb-30">Related post</h4>
@@ -163,7 +145,7 @@
                                                     <div class="post-author-date-area d-flex">
                                                         <!-- Post Date -->
                                                         <div class="post-date">
-                                                            <a href="#">{{ $relatedPost->dateAsCarbon->format('P d, Y') }}</a>
+                                                            <a href="#">{{ $relatedPost->dateAsCarbon->format('F d, Y') }}</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -175,6 +157,7 @@
                                     @endforeach
                                 </div>
                             </div>
+                            @endif
 
                             <!-- Comment Area Start -->
                             @if($post->comments->count() > 0)
@@ -198,24 +181,6 @@
                                                     <p>{{ $comment->message }}</p>
                                                 </div>
                                             </div>
-                                            {{--<ol class="children">
-                                                <li class="single_comment_area">
-                                                    <div class="comment-wrapper d-flex">
-                                                        <!-- Comment Meta -->
-                                                        <div class="comment-author">
-                                                            <img src="img/blog-img/18.jpg" alt="">
-                                                        </div>
-                                                        <!-- Comment Content -->
-                                                        <div class="comment-content">
-                                                            <span class="comment-date text-muted">27 Aug 2018</span>
-                                                            <h5>Brandon Kelley</h5>
-                                                            <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                            <a href="#">Like</a>
-                                                            <a class="active" href="#">Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ol>--}}
                                         </li>
                                     @endforeach
                                 </ol>

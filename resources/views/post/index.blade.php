@@ -51,7 +51,9 @@
                                             </div>
                                             <!-- Post Comments -->
                                             <div class="post-comments pl-2">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> {{ $mostPopularPost->comments->count() }}</a>
+                                                <a href="#"><i class="fa fa-comment-o"
+                                                               aria-hidden="true"></i> {{ $mostPopularPost->comments->count() }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -113,8 +115,19 @@
                                                 <!-- Post Comments -->
                                                 <div class="post-comments">
                                                     <a href="#" class="pl-2">
-                                                        <i class="fa fas fa-comment" aria-hidden="true"></i>
-                                                        {{ $post->comments->count() }}
+                                                        @auth()
+                                                            @if(auth()->user()->comments->contains('post_id', $post->id))
+                                                                <i class="fa fas fa-comment" aria-hidden="true"></i>
+                                                                {{ $post->comments->count() }}
+                                                            @else
+                                                                <i class="fa fa-comment-o" aria-hidden="true"></i>
+                                                                {{ $post->comments->count() }}
+                                                            @endif
+                                                        @endauth
+                                                        @guest()
+                                                            <i class="fa fas fa-comment-o" aria-hidden="true"></i>
+                                                            {{ $post->comments->count() }}
+                                                        @endguest
                                                     </a>
                                                 </div>
                                                 <!-- Post Share -->

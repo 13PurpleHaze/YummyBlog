@@ -41,7 +41,7 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->category->title }}</td>
-                                <td><a href="#"><i class="fa fa-eye"></i></a></td>
+                                <td><a href="{{ route('post.show', $post) }}"><i class="fa fa-eye"></i></a></td>
                                 <td>
                                     <form action="{{ route('personal.like.destroy', $post) }}" method="post">
                                         @csrf

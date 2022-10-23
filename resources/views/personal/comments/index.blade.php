@@ -31,7 +31,7 @@
                         <tr>
                             <th>id</th>
                             <th>Content</th>
-                            <th colspan="2" class="text-center">Action</th>
+                            <th colspan="3" class="text-center">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,6 +40,7 @@
                                 <td>{{ $comment->id }}</td>
                                 <td>{{ $comment->message }}</td>
                                 <td><a href="{{ route('personal.comment.edit', $comment) }}"><i class="fa fa-solid fa-pen text-success"></i></a></td>
+                                <td><a href="{{ isset($comment->post) ? route('post.show', $comment->post) : '#'}}"><i class="fa fa-eye text-yellow"></i></a></td>
                                 <td>
                                     <form action="{{ route('personal.comment.destroy', $comment) }}" method="post">
                                         @csrf

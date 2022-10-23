@@ -21,9 +21,9 @@
             <!-- Single Popular Post -->
             @foreach($popularPosts as $post)
             <div class="single-populer-post d-flex">
-                <img src="{{ 'storage/' . $post->preview_image }}" alt="">
+                <img src="{{ asset('storage/' . $post->preview_image) }}" alt="">
                 <div class="post-content">
-                    <a href="#">
+                    <a href="{{ route('post.show', $post) }}">
                         <h6>{{ $post->title }}</h6>
                     </a>
                     <p>{{ $post->dateAsCarbon->format('l, F d, Y') }}</p>

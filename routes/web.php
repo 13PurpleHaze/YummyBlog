@@ -22,7 +22,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->name('main.index');
-Route::group(['prefix' => 'posts'], function() {
+/*Route::group(['prefix' => 'posts'], function() {
     Route::get('/', [\App\Http\Controllers\Post\PostController::class, 'index'])->name('post.index');
     Route::get('/{post}', [\App\Http\Controllers\Post\PostController::class, 'show'])->name('post.show');
     Route::group(['prefix' => '{post}/comments'], function() {
@@ -31,7 +31,7 @@ Route::group(['prefix' => 'posts'], function() {
     Route::group(['prefix' => '{post}/likes'], function() {
         Route::post('/', [\App\Http\Controllers\Post\LikeController::class, 'store'])->name('post.like.store');
     });
-});
+});*/
 Route::group(['prefix' => 'categories'], function() {
     Route::get('/', [\App\Http\Controllers\Category\CategoryController::class, 'index'])->name('category.index');
     Route::group(['prefix' => '{category}/posts'],function () {

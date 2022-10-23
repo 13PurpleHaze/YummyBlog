@@ -30,9 +30,7 @@ class UserController extends Controller
         if(isset($data['photo'])) {
             $data['photo'] = Storage::disk('public')->put('images', $data['photo']);
         }
-        //dd($data);
         $user->update($data);
-        //dd($user);
         return redirect()->route('personal.main.index');
     }
 
