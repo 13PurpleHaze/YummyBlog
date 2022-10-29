@@ -28,3 +28,11 @@ Route::group(['prefix' => 'posts'], function() {
         Route::post('/', [\App\Http\Controllers\Post\LikeController::class, 'store'])->name('post.like.store');
     });
 });
+Route::get('/socials', [\App\Http\Controllers\Post\SocialController::class, 'index'])->name('social.index');
+Route::group(['prefix' => 'categories'], function() {
+    Route::get('/', [\App\Http\Controllers\Category\CategoryController::class, 'index'])->name('category.index');
+    Route::group(['prefix' => '{category}/posts'],function () {
+        Route::get('/', [\App\Http\Controllers\Category\PostController::class, 'index'])->name('category.post.index');
+    });
+});
+Route::get('/user', [\App\Http\Controllers\Post\UserController::class, 'index']);

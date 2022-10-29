@@ -11,6 +11,6 @@ class LikeController extends Controller
     public function store(Post $post)
     {
         auth()->user()->posts()->toggle($post);
-        return redirect()->back();
+        return [];
     }
 }

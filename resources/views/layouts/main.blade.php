@@ -38,31 +38,31 @@
                 <div class="col-5 col-sm-6">
                     <!--  Top Social bar start -->
                     <div class="top_social_bar">
-                        {{--@foreach($socials as $social)
+                        @foreach($socials as $social)
                             <a href="{{$social->link}}"><i class="fa fa-{{$social->title}}" aria-hidden="true"></i></a>
-                        @endforeach--}}
+                        @endforeach
                     </div>
                 </div>
                 <!--  Login Register Area -->
                 <div class="col-7 col-sm-6">
                     <div class="signup-search-area d-flex align-items-center justify-content-end">
                         <div class="login_register_area d-flex">
-                            {{--@guest()
+                            @guest()
                                 <div class="login">
                                     <a href="{{ route('login') }}">Sing in</a>
                                 </div>
                                 <div class="register">
                                     <a href="{{ route('register') }}">Sing up</a>
                                 </div>
-                            @endguest--}}
+                            @endguest
                         </div>
-                        {{--@auth()
+                        @auth()
                             <div class="d-flex justify-content-end align-items-center h-100 p-1" style="width: 40px">
                                 <img src="{{ auth()->user()->photo ? asset('storage/' . auth()->user()->photo) : ''}}"
                                      alt="" class="img-fluid h-100" style="border-radius: 50%">
                                 <a href="{{ route('personal.main.index') }}" class="ml-2">{{ auth()->user()->name }}</a>
                             </div>
-                        @endauth--}}
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                                     <router-link to="/posts" class="nav-link">Home</router-link>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
+                                    <router-link :to="{name: 'category.index'}" class="nav-link">Categories</router-link>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('tag.index') }}">Tags</a>

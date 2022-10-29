@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>-->
-    <div class="breadcumb-nav">
+    <div class="breadcumb-nav" v-if="post">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -30,7 +30,7 @@
     </div>
     <!-- ****** Breadcumb Area End ****** -->
     <!-- ****** Single Blog Area Start ****** -->
-    <section class="single_blog_area section_padding_80">
+    <section class="single_blog_area section_padding_80" v-if="post">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
@@ -52,7 +52,7 @@
                             <div class="single-post">
                                 <!-- Post Thumb -->
                                 <div class="post-thumb">
-                                    <img :src="`storage/${post.main_image}`" alt="">
+                                    <img :src="`/storage/${post.preview_image}`" alt="">
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">
@@ -114,7 +114,7 @@
                                     <a href="#">
                                         <h2 class="post-headline">{{ post.title }}</h2>
                                     </a>
-                                    {{ post.content }}
+                                    <div v-html="post.content"></div>
                                 </div>
                             </div>
 

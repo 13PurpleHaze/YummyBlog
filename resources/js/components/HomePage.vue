@@ -1,6 +1,6 @@
 <template>
 <!--     ****** Blog Area Start ****** -->
-    <section class="blog_area section_padding_0_80">
+    <section class="blog_area section_padding_0_80" v-if="posts">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
@@ -68,7 +68,7 @@
                             <div class="single-post wow fadeInUp" data-wow-delay=".4s">
                                 <!-- Post Thumb -->
                                 <div class="post-thumb">
-                                    <img :src="`storage/${post.preview_image}`" alt="">
+                                    <img :src="`/storage/${post.preview_image}`" alt="">
                                 </div>
                                 <!-- Post Content -->
                                 <div class="post-content">
@@ -142,6 +142,7 @@
                         </div>
                     </div>
                 </div>
+                <side-bar></side-bar>
             </div>
         </div>
     </section>
@@ -150,9 +151,13 @@
 
 <script>
 import axios from "axios";
+import SideBar from "./SideBar.vue";
 
 export default {
     name: "HomePage",
+    components: {
+        SideBar,
+    },
     data() {
         return {
             posts: [],

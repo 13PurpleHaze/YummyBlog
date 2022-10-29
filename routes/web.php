@@ -32,12 +32,7 @@ Route::get('/', [\App\Http\Controllers\Main\MainController::class, 'index'])->na
         Route::post('/', [\App\Http\Controllers\Post\LikeController::class, 'store'])->name('post.like.store');
     });
 });*/
-Route::group(['prefix' => 'categories'], function() {
-    Route::get('/', [\App\Http\Controllers\Category\CategoryController::class, 'index'])->name('category.index');
-    Route::group(['prefix' => '{category}/posts'],function () {
-        Route::get('/', [\App\Http\Controllers\Category\PostController::class, 'index'])->name('category.post.index');
-    });
-});
+
 Route::group(['prefix' => 'tags'], function() {
     Route::get('/', [\App\Http\Controllers\Tag\TagController::class, 'index'])->name('tag.index');
     Route::group(['prefix' => '{tag}/posts'],function () {
